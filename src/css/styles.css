@@ -1,0 +1,10 @@
+body {
+  background: #1794AC; }
+  body h1, body h2, body h3 {
+    font-family: 'Scope One', serif;
+    color: #B2C000; }
+  body p, body a {
+    font-family: 'Assistant', sans-serif;
+    color: #B2C000; }
+
+/*# sourceMappingURL=styles.css.map */
