@@ -4,7 +4,8 @@ export default class Loader extends Component {
   render() {
     return (
       <div className="loader">
-        <h1>Here loading</h1>
+        <div className="loadAnimation">...</div>
+        <h1>VIDEO BIRD</h1>
       </div>
     );
   }
