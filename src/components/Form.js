@@ -21,7 +21,12 @@ export default class Form extends Component {
     });
   }
 
+  randomize(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   postToEndpoint = (e) => {
+    console.log('calling');
     e.preventDefault();
 
     fetch('https://creative-showcase-api.herokuapp.com/videos', {
@@ -34,9 +39,10 @@ export default class Form extends Component {
        'video_type': this.state.videoType
      })
    }).then(response => response.json()).then((video) => {
+      video.top = this.randomize(0, window.innerHeight - 180);
+      video.left = this.randomize(0, window.innerWidth - 300);
+      video.seed = this.randomize(0, 1000);
       this.props.addVideo(video);
-      this.positionAllVideos(video);
-      this.floatyVideos();
     });
   }
 
@@ -69,18 +75,18 @@ export default class Form extends Component {
               </span>
             </div>
 
-           <div className="input-row">
-             <span className="input-wrapper">
-               <select name="type" value={this.props.videoType} onChange={this.handleChange} id="type">
-                 <option value="motion">motion</option>
-                 <option value="vr">vr</option>
-                 <option value="interactive">interactive</option>
-               </select>
-             </span>
-           </div>
+            <div className="input-row">
+               <span className="input-wrapper">
+                 <select name="type" value={this.props.videoType} onChange={this.handleChange} id="type">
+                   <option value="motion">motion</option>
+                   <option value="vr">vr</option>
+                   <option value="interactive">interactive</option>
+                 </select>
+               </span>
+            </div>
 
-           <div className="input-container">
-              <button type="submit">SHARE</button>
+            <div className="input-container">
+              <button className="form-share">SHARE</button>
             </div>
           </form>
         </div>

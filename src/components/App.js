@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import TransitionGroup from 'react-transition-group/TransitionGroup'
 
 import Loader from './Loader';
 import Main from './Main';
-import Flying from './Flying';
+
+import { Howl } from 'howler';
 
 export default class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      loading: false,
+      loading: true,
       videos: [],
       featuredVideos: [],
       filter: '',
@@ -18,10 +20,19 @@ export default class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this.sound = new Howl({
+      src: ['/africanLionSafari.mp3'],
+      loop: true,
+      volume: 0.3,
+    });
+  }
+
   componentWillMount() {
     setTimeout(() => {
       this.showMain();
-    }, 5000);
+      this.sound.play();
+    }, 2500);
 
     this.getAllVideos();
     this.getFeaturedVideos();
@@ -31,8 +42,6 @@ export default class App extends Component {
     this.setState({
       loading: false
     });
-
-    this.flying = new Flying(this.container);
   }
 
   addVideo = (video) => {
@@ -126,6 +135,7 @@ export default class App extends Component {
       videoChoice: video,
       movement: false
     });
+    this.sound.pause();
   }
 
   closeModal = () => {
@@ -133,28 +143,28 @@ export default class App extends Component {
       videoChoice: null,
       movement: true
     });
+    // this.sound.play();
   }
 
   render() {
-    if (this.state.loading) {
-      return <Loader />;
-    }
-
     return (
-      <div className="App">
-        <div className="container" ref={(div) => this.container = div}></div>
-        <Main
-          addVideo={this.addVideo}
-          videos={this.state.videos}
-          featuredVideos={this.state.featuredVideos}
-          getFilteredVideos={this.getFilteredVideos}
-          videoChoice={this.state.videoChoice}
-          closeModal={this.closeModal}
-          openModal={this.openModal}
-          pauseMovement={this.pauseMovement}
-          resumeMovement={this.resumeMovement}
-        />
-      </div>
+      <TransitionGroup>
+        {this.state.loading && <Loader />}
+        {
+          !this.state.loading &&
+          <Main
+            addVideo={this.addVideo}
+            videos={this.state.videos}
+            featuredVideos={this.state.featuredVideos}
+            getFilteredVideos={this.getFilteredVideos}
+            videoChoice={this.state.videoChoice}
+            closeModal={this.closeModal}
+            openModal={this.openModal}
+            pauseMovement={this.pauseMovement}
+            resumeMovement={this.resumeMovement}
+          />
+        }
+      </TransitionGroup>
     );
   }
 }

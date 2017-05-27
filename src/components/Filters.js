@@ -10,15 +10,15 @@ export default class Filters extends Component {
     return (
       <div className="filters">
         <div className="video-filter" onClick={(e) => {this.props.getFilteredVideos('motion')}}>
-          <p>motion</p>
+          <p>MOTION</p>
           <img src="/filterDot.svg" alt="filter"/>
         </div>
         <div className="video-filter" onClick={(e) => {this.props.getFilteredVideos('vr')}}>
-          <p>vr</p>
+          <p>VR</p>
           <img src="/filterDot.svg" alt="filter"/>
         </div>
         <div className="video-filter" onClick={(e) => {this.props.getFilteredVideos('interactive')}}>
-          <p>interactive</p>
+          <p>INTERACTIVE</p>
           <img src="/filterDot.svg" alt="filter"/>
         </div>
       </div>
