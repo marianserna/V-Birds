@@ -143,7 +143,7 @@ export default class App extends Component {
       videoChoice: null,
       movement: true
     });
-    // this.sound.play();
+    this.sound.play();
   }
 
   render() {
