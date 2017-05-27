@@ -38,8 +38,8 @@ export default class Featured extends Component {
         <div className="featured-videos">
           {this.renderFeaturedVideos()}
         </div>
-        <div className="featured-trigger" onClick={(e) => this.slideFeaturedInOut(e)} >
-          <p>FEATURED</p>
+        <div className="featured-trigger" >
+          <p onClick={(e) => this.slideFeaturedInOut(e)}>FEATURED</p>
         </div>
       </div>
     );
