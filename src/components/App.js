@@ -26,6 +26,9 @@ export default class App extends Component {
       loop: true,
       volume: 0.3,
     });
+
+    const bgImage = new Image();
+    bgImage.src = "/waves.svg";
   }
 
   componentWillMount() {
